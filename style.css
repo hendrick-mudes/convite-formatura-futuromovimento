@@ -1,0 +1,61 @@
+/* Estilos customizados adicionais */
+body {
+  background-color: #081226;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Animação suave para exibir/ocultar os campos de convidados */
+.guest-input {
+  transition: all 0.3s ease-in-out;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+.guest-input.show {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+/* Estilização para o ícone de rádio customizado (bolinha) */
+.radio-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #7e93af;
+  position: relative;
+  display: inline-block;
+}
+.peer:checked ~ div .radio-dot {
+  border-color: #3b82f6;
+}
+.peer:checked ~ div .radio-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+}
+
+/* SVG Símbolo Infinito Animado */
+.infinity-svg {
+  filter: drop-shadow(0px 10px 20px rgba(195, 240, 66, 0.15));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
