@@ -3,11 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. LÓGICA DE INTERFACE E REGRAS DE EXIBIÇÃO
   // ==========================================
   const guestRadios = document.querySelectorAll('input[name="convidados"]');
-  const wrapG1 = document.getElementById("wrap-convidado-1");
-  const wrapG2 = document.getElementById("wrap-convidado-2");
   
-  const inputG1 = document.getElementById("nome-convidado-1");
-  const inputG2 = document.getElementById("nome-convidado-2");
+  // Pegando os wrappers (divs) - aceita com hífen ou underline
+  const wrapG1 = document.getElementById("wrap-convidado-1") || document.getElementById("wrap_convidado_1");
+  const wrapG2 = document.getElementById("wrap-convidado-2") || document.getElementById("wrap_convidado_2");
+  
+  // Pegando os inputs (campos de texto) - aceita com hífen ou underline
+  const inputG1 = document.getElementById("nome_convidado_1") || document.getElementById("nome-convidado-1");
+  const inputG2 = document.getElementById("nome_convidado_2") || document.getElementById("nome-convidado-2");
 
   function handleGuestFields(value) {
     const numConvidados = parseInt(value, 10);
@@ -70,6 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.innerHTML = "Enviando...";
       submitBtn.disabled = true;
 
+      // Montando os dados. Agora usamos diretamente a variável inputG1 e inputG2 
+      // que já encontraram o campo correto com os nomes.
       const formData = {
         nome: document.getElementById("nome")?.value || "",
         presenca:
@@ -78,8 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
             : "Não",
         qtdConvidados:
           document.querySelector('input[name="convidados"]:checked')?.value || "0",
-        convidado1: document.getElementById("nome-convidado-1")?.value || "",
-        convidado2: document.getElementById("nome-convidado-2")?.value || "",
+        convidado1: inputG1?.value || "",
+        convidado2: inputG2?.value || "",
       };
 
       try {
@@ -90,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(formData),
         });
 
-        // Exibe o aviso de sucesso e recarrega a página ao clicar em "OK"
         alert("Presença confirmada com sucesso! Nos vemos na formatura.");
         window.location.reload(); 
         
